@@ -1,19 +1,13 @@
 // create express server
 import express from "express";
 import type { Application } from "express";
-
-// Routes
+import todoRouter from "./todo/routes.js";
 
 export function createServerApplication(): Application {
   const app = express();
 
-  app.get("/", function (req, res) {
-    return res.json({ message: "Hello! from Express Server." });
-  });
-
-  app.get("/logoff", function (req, res) {
-    return res.json({ message: "Chalo See ya later!" });
-  });
+  app.use(express.json());
+  app.use("/todos", todoRouter);
 
   return app;
 }
