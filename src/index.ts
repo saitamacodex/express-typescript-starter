@@ -10,7 +10,7 @@ async function main() {
     const PORT: number = env.PORT ? +env.PORT : 8080;
 
     server.listen(PORT, () => {
-      console.log(`Server running on http://localhost:${PORT}`);
+      console.log(`Server running on PORT: ${PORT}`);
     });
   } catch (error) {
     console.log(error);
