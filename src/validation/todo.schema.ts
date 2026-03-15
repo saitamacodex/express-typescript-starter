@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const todoValidationSchema = z.object({
-  id: z.string().describe("ID of the Todo"),
+  // id: z.string().describe("ID of the Todo"),
   title: z.string().describe("Title of the Todo"),
   description: z.string().optional().describe("description for the todo"),
   isCompleted: z
@@ -10,4 +10,6 @@ export const todoValidationSchema = z.object({
     .describe("if the todo item is completed or not"),
 });
 
-export type Todo = z.infer<typeof todoValidationSchema>;
+export type Todo = {
+  id: number;
+} & z.infer<typeof todoValidationSchema>;

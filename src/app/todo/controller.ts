@@ -22,12 +22,31 @@ class TodoController {
     try {
       const inValidated = req.body;
       const validationRes = await todoValidationSchema.parseAsync(inValidated);
-      this._db.push(validationRes);
 
-      return res.status(201).json({ todo: validationRes });
+      // genereate ID from server
+      const newTodo = {
+        id: this._db.length + 1,
+        ...validationRes,
+      };
+
+      this._db.push(newTodo);
+
+      return res.status(201).json({ todo: newTodo });
     } catch (error) {
       return res.status(500).json({ error });
     }
+  }
+
+  // delete todo
+  public deleteTodo(req: Request, res: Response) {
+    const id = Number(req.params.id);
+    const todoIdIndex = this._db.findIndex((todo_id) => todo_id.id === id);
+
+    if (todoIdIndex === -1) {
+      return res.status(404).json({ message: "Todo not found" });
+    }
+    const deleteTodo = this._db.splice(todoIdIndex, 1);
+    return res.json({ deletedTodo: deleteTodo[0] });
   }
 }
 
