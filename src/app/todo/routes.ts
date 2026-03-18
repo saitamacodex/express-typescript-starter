@@ -5,7 +5,7 @@ const router = Router();
 const controller = new TodoController();
 
 router.get("/", controller.getAllTodos.bind(controller));
-// router.get("/:id");
+router.get("/:id", controller.getTodoById.bind(controller));
 
 router.post("/", controller.insertTodo.bind(controller));
 

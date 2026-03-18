@@ -17,6 +17,15 @@ class TodoController {
     return res.json({ todos });
   }
 
+  public getTodoById(req: Request, res: Response) {
+    const id = Number(req.params.id);
+    const findItem = this._db.find((item) => item.id === id);
+    if (!findItem) {
+      return res.status(404).json({ message: "Todo Item not found" });
+    }
+    res.json(findItem);
+  }
+
   // create todo
   public async insertTodo(req: Request, res: Response) {
     try {
