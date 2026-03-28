@@ -1,4 +1,4 @@
-// create raw http server
+// create raw http server using node
 import http from "node:http";
 import { env } from "./env.js";
 import { createServerApplication } from "./app/index.js";
